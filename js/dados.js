@@ -33,7 +33,7 @@ const HABILIDADES = [
   },
   {
     grupo: "Linguagens",
-    itens: ["Java", "JavaScript", "TypeScript", "Python", "HTML / CSS", "C# (aprendendo)"],
+    itens: ["Java", "JavaScript", "TypeScript", "Python", "Lua", "HTML / CSS", "C# (aprendendo)"],
   },
   {
     grupo: "Ferramentas",
