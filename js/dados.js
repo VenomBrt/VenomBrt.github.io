@@ -139,7 +139,7 @@ const PROJETOS = [
     capa: "assets/images/projetos/recreate-launcher-capa.jpg",
     video: "assets/videos/recreate-launcher.mp4",
     imagens: [],
-    links: [{ rotulo: "GitHub", url: "https://github.com/VenomBrt/recreate-launcher" }],
+    links: [],
   },
   {
     nome: "Recreate Essencial",
