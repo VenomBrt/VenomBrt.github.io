@@ -2,7 +2,7 @@ const LINHAS_INTRO = [
   "RECREATE_OS v5.0 // inicializando sistema",
   "carregando módulos: forge · neoforge · fabric · spigot",
   "compilando plugins e launchers ........ OK",
-  "conectando ao servidor do Recreate .... OK",
+  "conectando ao Servidor Recreate ....... OK",
   "descriptografando identidade...",
 ];
 

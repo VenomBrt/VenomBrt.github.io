@@ -143,32 +143,57 @@ function renderizarHabilidades() {
   ).join("");
 }
 
-function midiaProjeto(p) {
+const ehYoutube = (src = "") => !src.includes("/") && !src.includes(".");
+
+function itensDoProjeto(p) {
+  const itens = [];
+  if (p.video) itens.push({ tipo: ehYoutube(p.video) ? "youtube" : "video", src: p.video, capa: p.capa });
+  (p.imagens || []).forEach((src) => itens.push({ tipo: "imagem", src, pixelado: p.pixelado }));
+  if (!itens.length && p.capa) itens.push({ tipo: "imagem", src: p.capa, pixelado: p.pixelado });
+  return itens;
+}
+
+function capaDoItem(item) {
+  if (item.capa) return item.capa;
+  if (item.tipo === "youtube") return `https://img.youtube.com/vi/${item.src}/hqdefault.jpg`;
+  if (item.tipo === "imagem") return item.src;
+  return "";
+}
+
+function midiaProjeto(p, indice) {
   const categoria = `<span class="projeto-categoria">${NOMES_CATEGORIA[p.categoria] || escapar(p.categoria)}</span>`;
-  if (p.video) {
-    const ehYoutube = !p.video.includes("/") && !p.video.includes(".");
-    const capa = p.imagem
-      ? `<img src="${escapar(p.imagem)}" alt="${escapar(p.nome)}" loading="lazy" />`
-      : ehYoutube
-      ? `<img src="https://img.youtube.com/vi/${escapar(p.video)}/hqdefault.jpg" alt="${escapar(p.nome)}" loading="lazy" />`
-      : `<video src="${escapar(p.video)}" muted loop playsinline preload="metadata"></video>`;
-    const tipo = ehYoutube ? "youtube" : "video";
-    return `<div class="projeto-midia" data-tipo="${tipo}" data-src="${escapar(p.video)}">${capa}<span class="projeto-play"></span>${categoria}</div>`;
+  const itens = itensDoProjeto(p);
+  if (!itens.length) {
+    return `<div class="projeto-midia sem-midia"><div class="projeto-placeholder">${escapar(p.nome.split(" ")[0].toUpperCase())}</div>${categoria}</div>`;
   }
-  if (p.imagem) {
-    return `<div class="projeto-midia" data-tipo="imagem" data-src="${escapar(p.imagem)}"><img src="${escapar(p.imagem)}" alt="${escapar(p.nome)}" loading="lazy" />${categoria}</div>`;
-  }
-  return `<div class="projeto-midia"><div class="projeto-placeholder">${escapar(p.nome.split(" ")[0].toUpperCase())}</div>${categoria}</div>`;
+
+  const capa = p.capa || capaDoItem(itens[0]);
+  const imagem = capa
+    ? `<img src="${escapar(capa)}" alt="${escapar(p.nome)}" loading="lazy" />`
+    : `<video src="${escapar(itens[0].src)}#t=1" muted playsinline preload="metadata"></video>`;
+  const play = p.video ? `<span class="projeto-play"></span>` : "";
+  const contador = itens.length > 1 ? `<span class="projeto-contador mono">${itens.length} mídias</span>` : "";
+  const classe = p.pixelado ? "projeto-midia pixelado" : "projeto-midia";
+
+  return `<div class="${classe}" data-projeto="${indice}">${imagem}${play}${categoria}${contador}</div>`;
 }
 
 function renderizarProjetos() {
   $("#lista-projetos").innerHTML = PROJETOS.map(
-    (p) => `
+    (p, i) => `
     <article class="projeto revelar" data-categoria="${escapar(p.categoria)}">
-      ${midiaProjeto(p)}
+      ${midiaProjeto(p, i)}
       <div class="projeto-corpo">
-        <h3>${escapar(p.nome)}</h3>
+        <div class="projeto-cabecalho">
+          <h3>${escapar(p.nome)}</h3>
+          ${p.versao ? `<span class="projeto-versao mono">${escapar(p.versao)}</span>` : ""}
+        </div>
         <p>${escapar(p.descricao)}</p>
+        ${
+          p.destaques && p.destaques.length
+            ? `<ul class="projeto-destaques">${p.destaques.map((d) => `<li>${escapar(d)}</li>`).join("")}</ul>`
+            : ""
+        }
         <div class="tags">${p.tecnologias.map((t) => `<span class="tag">${escapar(t)}</span>`).join("")}</div>
         ${
           p.links.length
@@ -200,17 +225,15 @@ function renderizarGaleria() {
     lista.innerHTML = `<div class="galeria-vazia mono">// em breve: imagens e vídeos dos projetos</div>`;
     return;
   }
-  lista.innerHTML = GALERIA.map((item) => {
+  lista.innerHTML = GALERIA.map((item, i) => {
     const legenda = item.legenda ? `<div class="galeria-legenda">${escapar(item.legenda)}</div>` : "";
-    let midia;
-    if (item.tipo === "youtube") {
-      midia = `<img src="https://img.youtube.com/vi/${escapar(item.src)}/hqdefault.jpg" alt="${escapar(item.legenda || "")}" loading="lazy" /><span class="projeto-play"></span>`;
-    } else if (item.tipo === "video") {
-      midia = `<video src="${escapar(item.src)}" muted loop playsinline preload="metadata"></video><span class="projeto-play"></span>`;
-    } else {
-      midia = `<img src="${escapar(item.src)}" alt="${escapar(item.legenda || "")}" loading="lazy" />`;
-    }
-    return `<div class="galeria-item revelar" data-tipo="${escapar(item.tipo)}" data-src="${escapar(item.src)}">${midia}${legenda}</div>`;
+    const capa = capaDoItem(item);
+    const midia = capa
+      ? `<img src="${escapar(capa)}" alt="${escapar(item.legenda || "")}" loading="lazy" />`
+      : `<video src="${escapar(item.src)}#t=1" muted playsinline preload="metadata"></video>`;
+    const play = item.tipo === "imagem" ? "" : `<span class="projeto-play"></span>`;
+    const classe = item.pixelado ? "galeria-item pixelado revelar" : "galeria-item revelar";
+    return `<div class="${classe}" data-galeria="${i}">${midia}${play}${legenda}</div>`;
   }).join("");
 }
 
@@ -218,6 +241,29 @@ function renderizarGaleria() {
 function iniciarLightbox() {
   const lightbox = $("#lightbox");
   const conteudo = $("#lightbox-conteudo");
+  const contador = $("#lightbox-contador");
+  let itens = [];
+  let atual = 0;
+
+  function mostrar(indice) {
+    atual = (indice + itens.length) % itens.length;
+    const item = itens[atual];
+    if (item.tipo === "youtube") {
+      conteudo.innerHTML = `<iframe src="https://www.youtube.com/embed/${escapar(item.src)}?autoplay=1" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>`;
+    } else if (item.tipo === "video") {
+      conteudo.innerHTML = `<video src="${escapar(item.src)}" controls autoplay playsinline></video>`;
+    } else {
+      conteudo.innerHTML = `<img src="${escapar(item.src)}" alt="" class="${item.pixelado ? "pixelado" : ""}" />`;
+    }
+    lightbox.classList.toggle("varios", itens.length > 1);
+    contador.textContent = itens.length > 1 ? `${atual + 1} / ${itens.length}` : "";
+  }
+
+  function abrir(lista, indice = 0) {
+    itens = lista;
+    mostrar(indice);
+    lightbox.classList.add("aberto");
+  }
 
   const fechar = () => {
     lightbox.classList.remove("aberto");
@@ -225,31 +271,24 @@ function iniciarLightbox() {
   };
 
   document.addEventListener("click", (e) => {
-    const alvo = e.target.closest("[data-tipo][data-src]");
-    if (!alvo) return;
-    const { tipo, src } = alvo.dataset;
-    if (tipo === "youtube") {
-      conteudo.innerHTML = `<iframe src="https://www.youtube.com/embed/${escapar(src)}?autoplay=1" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>`;
-    } else if (tipo === "video") {
-      conteudo.innerHTML = `<video src="${escapar(src)}" controls autoplay playsinline></video>`;
-    } else {
-      conteudo.innerHTML = `<img src="${escapar(src)}" alt="" />`;
-    }
-    lightbox.classList.add("aberto");
+    const projeto = e.target.closest("[data-projeto]");
+    if (projeto) return abrir(itensDoProjeto(PROJETOS[projeto.dataset.projeto]));
+    const galeria = e.target.closest("[data-galeria]");
+    if (galeria) abrir(GALERIA, Number(galeria.dataset.galeria));
   });
+
+  $("#lightbox-anterior").addEventListener("click", () => mostrar(atual - 1));
+  $("#lightbox-proximo").addEventListener("click", () => mostrar(atual + 1));
 
   lightbox.addEventListener("click", (e) => {
     if (e.target === lightbox || e.target.classList.contains("lightbox-fechar")) fechar();
   });
-  document.addEventListener("keydown", (e) => e.key === "Escape" && fechar());
 
-  document.addEventListener("mouseover", (e) => {
-    const video = e.target.closest(".projeto-midia video, .galeria-item video");
-    if (video) video.play().catch(() => {});
-  });
-  document.addEventListener("mouseout", (e) => {
-    const video = e.target.closest(".projeto-midia video, .galeria-item video");
-    if (video) video.pause();
+  document.addEventListener("keydown", (e) => {
+    if (!lightbox.classList.contains("aberto")) return;
+    if (e.key === "Escape") fechar();
+    if (e.key === "ArrowLeft" && itens.length > 1) mostrar(atual - 1);
+    if (e.key === "ArrowRight" && itens.length > 1) mostrar(atual + 1);
   });
 }
 

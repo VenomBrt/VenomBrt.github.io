@@ -863,15 +863,78 @@ body.pronto .scroll-indicador { transition-delay: 1.1s; }
   flex: 1;
 }
 
+.projeto-cabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
 .projeto-corpo h3 {
   font-family: var(--fonte-titulo);
   font-size: 1.2rem;
   letter-spacing: 1px;
 }
 
+.projeto-versao {
+  font-size: 0.75rem;
+  color: var(--ciano);
+  border: 1px solid rgba(34, 211, 238, 0.4);
+  padding: 0.15rem 0.55rem;
+  white-space: nowrap;
+}
+
+.projeto-destaques {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.projeto-destaques li {
+  position: relative;
+  padding-left: 1.3rem;
+  color: var(--texto);
+  font-size: 1.02rem;
+}
+
+.projeto-destaques li::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  color: var(--roxo);
+  text-shadow: var(--neon);
+}
+
+.projeto-contador {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  font-size: 0.72rem;
+  padding: 0.2rem 0.6rem;
+  background: rgba(10, 6, 18, 0.85);
+  border: 1px solid var(--borda);
+  color: var(--texto-2);
+}
+
+.pixelado img,
+img.pixelado {
+  image-rendering: pixelated;
+}
+
+.projeto-midia.pixelado img {
+  object-fit: contain;
+  padding: 1.2rem;
+  background: radial-gradient(circle, #231339, #0d0719);
+}
+
 .projeto-corpo p {
   color: var(--texto-2);
-  flex: 1;
+}
+
+.projeto-corpo > .tags {
+  margin-top: auto;
 }
 
 .projeto-links {
@@ -1051,6 +1114,45 @@ body.pronto .scroll-indicador { transition-delay: 1.1s; }
   aspect-ratio: 16 / 9;
   border: 0;
   display: block;
+}
+
+.lightbox-seta {
+  display: none;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 52px;
+  height: 52px;
+  font-size: 2.2rem;
+  line-height: 1;
+  background: rgba(24, 14, 42, 0.8);
+  border: 1px solid var(--roxo);
+  color: var(--roxo-claro);
+  cursor: pointer;
+  z-index: 1;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.lightbox-seta:hover {
+  background: var(--roxo);
+  color: #fff;
+  box-shadow: var(--neon);
+}
+
+.lightbox-seta.anterior { left: 1.5rem; }
+.lightbox-seta.proximo { right: 1.5rem; }
+
+.lightbox.varios .lightbox-seta {
+  display: block;
+}
+
+.lightbox-contador {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--texto-2);
+  font-size: 0.85rem;
 }
 
 .lightbox-fechar {
