@@ -159,6 +159,7 @@ const ehYoutube = (src = "") => !src.includes("/") && !src.includes(".");
 function itensDoProjeto(p) {
   const itens = [];
   if (p.video) itens.push({ tipo: ehYoutube(p.video) ? "youtube" : "video", src: p.video, capa: p.capa });
+  (p.videos || []).forEach((v) => itens.push({ tipo: ehYoutube(v.src) ? "youtube" : "video", src: v.src, capa: v.capa }));
   (p.imagens || []).forEach((src) => itens.push({ tipo: "imagem", src, pixelado: p.pixelado }));
   if (!itens.length && p.capa) itens.push({ tipo: "imagem", src: p.capa, pixelado: p.pixelado });
   return itens;
