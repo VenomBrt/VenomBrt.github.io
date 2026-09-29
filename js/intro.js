@@ -21,7 +21,13 @@ function rodarIntro() {
     sessionStorage.setItem("introVista", "1");
   } catch {}
 
-  return aguardarEntrada(intro).then(() => (jaViu ? introRapida(intro) : introCompleta(intro)));
+  intro.classList.add("preparando");
+  return aguardarEntrada(intro)
+    .then(() => som.pronto())
+    .then(() => {
+      intro.classList.remove("preparando");
+      return jaViu ? introRapida(intro) : introCompleta(intro);
+    });
 }
 
 function aguardarEntrada(intro) {

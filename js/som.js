@@ -86,8 +86,12 @@ class Som {
 
   async desbloquear() {
     const retomar = this.ctx.resume().catch(() => {});
-    const limite = new Promise((r) => setTimeout(r, 2500));
-    await Promise.race([Promise.all([retomar, this.carregado]), limite]);
+    await Promise.race([Promise.all([retomar, this.carregado]), new Promise((r) => setTimeout(r, 2500))]);
+  }
+
+  pronto() {
+    if (!this.ctx || this.mudo) return Promise.resolve();
+    return Promise.race([this.carregado, new Promise((r) => setTimeout(r, 2500))]);
   }
 
   silenciar() {

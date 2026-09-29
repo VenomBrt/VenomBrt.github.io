@@ -345,6 +345,14 @@ body.carregando {
   cursor: default;
 }
 
+.intro.preparando {
+  background: #07040d;
+}
+
+.intro.preparando .intro-conteudo {
+  visibility: hidden;
+}
+
 .intro.aguardando .intro-entrada {
   display: flex;
 }
