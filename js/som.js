@@ -59,12 +59,14 @@ class Som {
     limitador.connect(this.master);
     this.master.connect(this.ctx.destination);
 
-    ARQUIVOS_SOM.forEach(async ({ arquivo, tipo }) => {
-      try {
-        const resposta = await fetch(`assets/sfx/${arquivo}`);
-        this.porTipo[tipo].push(await this.ctx.decodeAudioData(await resposta.arrayBuffer()));
-      } catch {}
-    });
+    this.carregado = Promise.all(
+      ARQUIVOS_SOM.map(async ({ arquivo, tipo }) => {
+        try {
+          const resposta = await fetch(`assets/sfx/${arquivo}`);
+          this.porTipo[tipo].push(await this.ctx.decodeAudioData(await resposta.arrayBuffer()));
+        } catch {}
+      })
+    );
 
     const desbloquear = () => {
       if (this.ctx.state === "suspended") this.ctx.resume().catch(() => {});
@@ -76,6 +78,22 @@ class Som {
     document.addEventListener("visibilitychange", () => {
       if (document.hidden) this.pararTudo();
     });
+  }
+
+  precisaDesbloquear() {
+    return !!this.ctx && !this.mudo && this.ctx.state !== "running";
+  }
+
+  async desbloquear() {
+    const retomar = this.ctx.resume().catch(() => {});
+    const limite = new Promise((r) => setTimeout(r, 2500));
+    await Promise.race([Promise.all([retomar, this.carregado]), limite]);
+  }
+
+  silenciar() {
+    this.mudo = true;
+    localStorage.setItem("som", "off");
+    this.pararTudo();
   }
 
   podeTocar() {

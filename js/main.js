@@ -334,6 +334,7 @@ function iniciarNavegacao() {
     som.alternar();
     atualizarSom();
   });
+  document.addEventListener("som-alterado", atualizarSom);
   atualizarSom();
   links.forEach((l) => l.addEventListener("click", () => nav.classList.remove("menu-aberto")));
 

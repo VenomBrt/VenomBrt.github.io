@@ -21,8 +21,31 @@ function rodarIntro() {
     sessionStorage.setItem("introVista", "1");
   } catch {}
 
-  if (jaViu) return introRapida(intro);
+  return aguardarEntrada(intro).then(() => (jaViu ? introRapida(intro) : introCompleta(intro)));
+}
 
+function aguardarEntrada(intro) {
+  if (!som.precisaDesbloquear()) return Promise.resolve();
+  intro.classList.add("aguardando");
+  const entrar = document.getElementById("intro-entrar");
+  const semSom = document.getElementById("intro-sem-som");
+  entrar.focus({ preventScroll: true });
+
+  return new Promise((resolve) => {
+    const concluir = async (comSom) => {
+      entrar.disabled = semSom.disabled = true;
+      if (comSom) await som.desbloquear();
+      else som.silenciar();
+      document.dispatchEvent(new Event("som-alterado"));
+      intro.classList.remove("aguardando");
+      resolve();
+    };
+    entrar.addEventListener("click", (e) => (e.stopPropagation(), concluir(true)), { once: true });
+    semSom.addEventListener("click", (e) => (e.stopPropagation(), concluir(false)), { once: true });
+  });
+}
+
+function introCompleta(intro) {
   let pulou = false;
   const pular = () => (pulou = true);
   intro.addEventListener("click", pular);
