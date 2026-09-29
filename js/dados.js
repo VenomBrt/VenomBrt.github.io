@@ -47,16 +47,16 @@ const HABILIDADES = [
 const PROJETOS = [
   {
     nome: "BetterLockCraft",
-    categoria: "mod",
-    versao: "Minecraft 1.21.1",
-    descricao: "O sistema de cadeados mais completo para Minecraft. Tranque portas, baús e barris e veja o cadeado direto no bloco.",
+    categoria: "plugin",
+    versao: "1.20.x – 1.21.x",
+    descricao: "O sistema de cadeados mais completo para servidores de Minecraft. Tranque portas, baús e barris e veja o cadeado direto no bloco.",
     destaques: [
       "Cadeado visível em portas, baús e barris",
       "Minigame de lockpick para arrombar fechaduras",
       "Lockpicks de 7 materiais, da madeira à netherite",
       "Menu completo de gerenciamento",
     ],
-    tecnologias: ["Java", "Minecraft 1.21.1"],
+    tecnologias: ["Java", "Paper / Spigot"],
     capa: "assets/images/projetos/betterlockcraft-blocos.jpg",
     imagens: ["assets/images/projetos/betterlockcraft-blocos.jpg", "assets/images/projetos/betterlockcraft-lockpicks.png"],
     links: [],
