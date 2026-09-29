@@ -321,6 +321,8 @@ function iniciarNavegacao() {
 
   $(".nav-toggle").addEventListener("click", () => nav.classList.toggle("menu-aberto"));
 
+  $$(".glitch-hover").forEach((el) => el.addEventListener("mouseenter", () => som.surto()));
+
   const botaoSom = $("#nav-som");
   const atualizarSom = () => {
     const texto = som.mudo ? "Ligar som" : "Desligar som";
