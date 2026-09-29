@@ -333,9 +333,7 @@ function iniciarNavegacao() {
   botaoSom.addEventListener("click", () => {
     som.alternar();
     atualizarSom();
-  });
-  document.addEventListener("som-alterado", atualizarSom);
-  atualizarSom();
+  });  atualizarSom();
   links.forEach((l) => l.addEventListener("click", () => nav.classList.remove("menu-aberto")));
 
   const observador = new IntersectionObserver(

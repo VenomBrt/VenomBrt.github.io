@@ -80,24 +80,9 @@ class Som {
     });
   }
 
-  precisaDesbloquear() {
-    return !!this.ctx && !this.mudo && this.ctx.state !== "running";
-  }
-
-  async desbloquear() {
-    const retomar = this.ctx.resume().catch(() => {});
-    await Promise.race([Promise.all([retomar, this.carregado]), new Promise((r) => setTimeout(r, 2500))]);
-  }
-
   pronto() {
     if (!this.ctx || this.mudo) return Promise.resolve();
     return Promise.race([this.carregado, new Promise((r) => setTimeout(r, 2500))]);
-  }
-
-  silenciar() {
-    this.mudo = true;
-    localStorage.setItem("som", "off");
-    this.pararTudo();
   }
 
   podeTocar() {
