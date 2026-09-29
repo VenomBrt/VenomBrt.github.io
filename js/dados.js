@@ -21,7 +21,6 @@ const PERFIL = {
     { valor: 7, sufixo: "", rotulo: "anos programando" },
     { valor: 5, sufixo: "", rotulo: "anos com mods e modpacks" },
     { valor: 2, sufixo: "", rotulo: "anos com plugins" },
-    { valor: 16, sufixo: "+", rotulo: "doenças no sistema de medicina" },
   ],
   github: "https://github.com/VenomBrt",
   discordUsuario: "venom.brt",
