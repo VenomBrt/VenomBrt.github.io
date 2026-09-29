@@ -13,13 +13,14 @@ const PERFIL = {
     "Sites e aplicações web",
   ],
   sobre: [
-    "Opa! Eu sou o VenomBrt, programador e fundador do Recreate Studios. Há mais de 5 anos crio para Minecraft: plugins, mods, modpacks, launchers e servidores, desde coisas simples até sistemas bem complexos.",
+    "Opa! Eu sou o VenomBrt, programador e fundador do Recreate Studios. Programo há uns 7 anos: crio mods e modpacks para Minecraft há 5 anos e plugins há 2, desde coisas simples até sistemas bem complexos.",
     "Hoje meu principal projeto é o Recreate, um servidor de megaverso que venho desenvolvendo junto com uma equipe.",
     "Também faço sites, ferramentas e automações. Se você tem uma ideia e não sabe como colocar em prática, pode me chamar: a gente vê junto a melhor forma de fazer.",
   ],
   estatisticas: [
-    { valor: 5, sufixo: "+", rotulo: "anos de experiência" },
-    { valor: 4, sufixo: "", rotulo: "plataformas de mod" },
+    { valor: 7, sufixo: "", rotulo: "anos programando" },
+    { valor: 5, sufixo: "", rotulo: "anos com mods e modpacks" },
+    { valor: 2, sufixo: "", rotulo: "anos com plugins" },
     { valor: 16, sufixo: "+", rotulo: "doenças no sistema de medicina" },
   ],
   github: "https://github.com/VenomBrt",
