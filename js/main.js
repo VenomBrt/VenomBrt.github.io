@@ -133,6 +133,17 @@ function renderizarPerfil() {
   $("#ano").textContent = new Date().getFullYear();
 }
 
+function renderizarServicos() {
+  $("#servicos-lista").innerHTML = SERVICOS.map(
+    (s, i) => `
+    <div class="servico revelar">
+      <span class="servico-numero mono">${String(i + 1).padStart(2, "0")}</span>
+      <h3>${escapar(s.titulo)}</h3>
+      <p>${escapar(s.texto)}</p>
+    </div>`
+  ).join("");
+}
+
 function renderizarHabilidades() {
   $("#skills").innerHTML = HABILIDADES.map(
     (g) => `
@@ -397,6 +408,7 @@ async function iniciarHero() {
 }
 
 renderizarPerfil();
+renderizarServicos();
 renderizarHabilidades();
 renderizarProjetos();
 renderizarGaleria();

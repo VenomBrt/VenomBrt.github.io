@@ -13,8 +13,9 @@ const PERFIL = {
     "Sites e aplicações web",
   ],
   sobre: [
-    "Sou o VenomBrt, desenvolvedor full-stack e fundador do Recreate Studios. Há mais de 5 anos crio experiências para Minecraft: mods, plugins, modpacks, launchers e servidores.",
-    "Também desenvolvo sites e aplicações web, sempre buscando unir performance, visual caprichado e uma boa experiência para quem usa.",
+    "Opa! Eu sou o VenomBrt, programador e fundador do Recreate Studios. Há mais de 5 anos crio para Minecraft: plugins, mods, modpacks, launchers e servidores, desde coisas simples até sistemas bem complexos.",
+    "Hoje meu principal projeto é o Recreate, um servidor de megaverso que venho desenvolvendo junto com uma equipe.",
+    "Também faço sites, ferramentas e automações. Se você tem uma ideia e não sabe como colocar em prática, pode me chamar: a gente vê junto a melhor forma de fazer.",
   ],
   estatisticas: [
     { valor: 5, sufixo: "+", rotulo: "anos de experiência" },
@@ -25,6 +26,29 @@ const PERFIL = {
   discordUsuario: "venom.brt",
   discordServidor: "https://discord.gg/JjGG2USvF",
 };
+
+const SERVICOS = [
+  {
+    titulo: "Plugins e mods",
+    texto: "Do mais simples ao sistema bem complexo e personalizado para o seu projeto, em Paper, Spigot, Forge, NeoForge ou Fabric.",
+  },
+  {
+    titulo: "Correção e otimização",
+    texto: "Pego um sistema que já existe para corrigir bugs, melhorar, otimizar ou adicionar novas funções.",
+  },
+  {
+    titulo: "Launchers personalizados",
+    texto: "Launchers com a cara do seu servidor: login, skins, amigos e atualização automática.",
+  },
+  {
+    titulo: "Sites",
+    texto: "Sites completos do jeito que você quiser, da página do seu servidor a um portfolio como este.",
+  },
+  {
+    titulo: "Sistemas e automações",
+    texto: "Ferramentas, automações e outros projetos personalizados para o que você precisar.",
+  },
+];
 
 const HABILIDADES = [
   {
