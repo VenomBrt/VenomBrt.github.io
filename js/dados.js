@@ -162,6 +162,7 @@ const PROJETOS = [
 // tipo: "imagem" | "video" | "youtube" (para youtube, use o ID do vídeo em "src")
 // capa: imagem mostrada na grade para vídeos
 const GALERIA = [
+  { tipo: "imagem", src: "assets/images/recreate-studio-arte.jpg", legenda: "Recreate Studio · arte" },
   { tipo: "imagem", src: "assets/images/projetos/aeronautics-fisica.jpg", legenda: "Recreate Aeronautics · veículo no ar" },
   { tipo: "video", src: "assets/videos/recreate-menu.mp4", capa: "assets/images/projetos/recreate-menu-capa.jpg", legenda: "Recreate Essencial · menu" },
   { tipo: "imagem", src: "assets/images/projetos/betterlockcraft-blocos.jpg", legenda: "BetterLockCraft · cadeados nos blocos" },
