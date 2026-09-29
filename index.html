@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>VenomBrt | Recreate Studios</title>
-  <meta name="description" content="Portfolio do VenomBrt, fundador da Recreate Studios. Mods, plugins e launchers para Minecraft, além de sites." />
+  <meta name="description" content="Portfolio do VenomBrt, fundador do Recreate Studios. Mods, plugins e launchers para Minecraft, além de sites." />
   <meta name="theme-color" content="#0a0612" />
   <meta property="og:title" content="VenomBrt | Recreate Studios" />
   <meta property="og:description" content="Mods, plugins e launchers para Minecraft, além de sites." />
@@ -15,7 +15,20 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
-<body>
+<body class="carregando">
+  <div class="intro" id="intro" aria-hidden="true">
+    <div class="intro-fatias" id="intro-fatias"></div>
+    <div class="intro-conteudo">
+      <div class="intro-terminal mono" id="intro-terminal"></div>
+      <div class="intro-logo" id="intro-logo">VENOMBRT</div>
+      <div class="intro-carregamento">
+        <div class="intro-barra"><span id="intro-progresso"></span></div>
+        <span class="intro-porcentagem mono" id="intro-porcentagem">000%</span>
+      </div>
+      <p class="intro-pular mono">clique para pular</p>
+    </div>
+  </div>
+
   <canvas id="fundo" aria-hidden="true"></canvas>
   <div class="scanlines" aria-hidden="true"></div>
 
@@ -34,7 +47,7 @@
   <main>
     <section id="inicio" class="hero">
       <p class="hero-tag mono">&lt;olá, mundo /&gt;</p>
-      <h1 class="glitch" data-text="VENOMBRT">VENOMBRT</h1>
+      <h1 class="glitch" id="hero-glitch">VENOMBRT</h1>
       <p class="hero-sub" id="hero-titulo"></p>
       <p class="hero-typing mono"><span class="prompt">&gt;</span> <span id="digitando"></span><span class="cursor">_</span></p>
       <div class="hero-botoes">
@@ -45,7 +58,7 @@
     </section>
 
     <section id="sobre" class="secao">
-      <h2 class="titulo-secao glitch-hover" data-text="// SOBRE">// SOBRE</h2>
+      <h2 class="titulo-secao">// SOBRE</h2>
       <div class="sobre-grid">
         <div class="sobre-foto revelar">
           <div class="foto-moldura">
@@ -58,12 +71,12 @@
     </section>
 
     <section id="habilidades" class="secao">
-      <h2 class="titulo-secao glitch-hover" data-text="// HABILIDADES">// HABILIDADES</h2>
+      <h2 class="titulo-secao">// HABILIDADES</h2>
       <div class="skills-grid" id="skills"></div>
     </section>
 
     <section id="projetos" class="secao">
-      <h2 class="titulo-secao glitch-hover" data-text="// PROJETOS">// PROJETOS</h2>
+      <h2 class="titulo-secao">// PROJETOS</h2>
       <div class="filtros" id="filtros">
         <button class="filtro ativo" data-filtro="todos">Todos</button>
         <button class="filtro" data-filtro="mod">Mods</button>
@@ -75,13 +88,13 @@
     </section>
 
     <section id="galeria" class="secao">
-      <h2 class="titulo-secao glitch-hover" data-text="// GALERIA">// GALERIA</h2>
+      <h2 class="titulo-secao">// GALERIA</h2>
       <div class="galeria-grid" id="lista-galeria"></div>
     </section>
 
     <section id="contato" class="secao">
-      <h2 class="titulo-secao glitch-hover" data-text="// CONTATO">// CONTATO</h2>
-      <p class="contato-intro revelar">Quer trocar uma ideia, tirar dúvidas ou acompanhar os projetos? Me chama no Discord ou entra no servidor da Recreate.</p>
+      <h2 class="titulo-secao">// CONTATO</h2>
+      <p class="contato-intro revelar">Quer trocar uma ideia, tirar dúvidas ou acompanhar os projetos? Me chama no Discord ou entra no servidor do Recreate.</p>
       <div class="contato-grid">
         <button class="card-contato revelar" id="copiar-discord">
           <svg viewBox="0 0 24 24"><path d="M20.3 4.4A19.8 19.8 0 0 0 15.4 3l-.6 1.3a18.4 18.4 0 0 0-5.6 0L8.6 3a19.7 19.7 0 0 0-4.9 1.5C.6 9.1-.3 13.6.1 18.1a19.9 19.9 0 0 0 6 3l1.3-2a12.9 12.9 0 0 1-2-1l.5-.4a14.2 14.2 0 0 0 12.2 0l.5.4-2 1 1.3 2a19.8 19.8 0 0 0 6-3c.5-5.2-.9-9.7-3.6-13.7ZM8 15.4c-1.2 0-2.2-1.1-2.2-2.4S6.8 10.6 8 10.6s2.2 1.1 2.2 2.4-1 2.4-2.2 2.4Zm8 0c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4Z"/></svg>
@@ -117,6 +130,8 @@
   <div class="toast mono" id="toast"></div>
 
   <script src="js/dados.js"></script>
+  <script src="js/glitch.js"></script>
+  <script src="js/intro.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

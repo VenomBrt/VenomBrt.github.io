@@ -303,14 +303,21 @@ function iniciarRevelacao() {
   );
   $$(".revelar").forEach((el) => observador.observe(el));
 
-  const titulos = new IntersectionObserver((entradas) => {
-    entradas.forEach((entrada) => {
-      if (!entrada.isIntersecting) return;
-      entrada.target.classList.add("glitchando");
-      setTimeout(() => entrada.target.classList.remove("glitchando"), 600);
-    });
+  const titulos = new IntersectionObserver(
+    (entradas) => {
+      entradas.forEach((entrada) => {
+        if (!entrada.isIntersecting) return;
+        entrada.target.glitch.decodificar(600);
+        titulos.unobserve(entrada.target);
+      });
+    },
+    { threshold: 0.6 }
+  );
+  $$(".titulo-secao").forEach((titulo) => {
+    titulo.glitch = new Glitch(titulo);
+    titulo.addEventListener("mouseenter", () => titulo.glitch.surto(1.2));
+    titulos.observe(titulo);
   });
-  $$(".titulo-secao").forEach((t) => titulos.observe(t));
 }
 
 function iniciarDiscord() {
@@ -332,13 +339,31 @@ function mostrarToast(mensagem) {
   mostrarToast.timer = setTimeout(() => toast.classList.remove("mostrar"), 2200);
 }
 
+async function iniciarHero() {
+  if (!location.hash) {
+    history.scrollRestoration = "manual";
+    window.scrollTo(0, 0);
+  }
+  const hero = new Glitch($("#hero-glitch"));
+  hero.esconder();
+
+  await rodarIntro();
+  document.body.classList.remove("carregando");
+  document.body.classList.add("pronto");
+
+  await hero.decodificar(1100);
+  await hero.surto(1.6, 220);
+  hero.automatico();
+  iniciarDigitacao();
+}
+
 renderizarPerfil();
 renderizarHabilidades();
 renderizarProjetos();
 renderizarGaleria();
 iniciarFundo();
-iniciarDigitacao();
 iniciarLightbox();
 iniciarNavegacao();
 iniciarRevelacao();
 iniciarDiscord();
+iniciarHero();

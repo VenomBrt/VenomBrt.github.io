@@ -3,7 +3,7 @@
 
 const PERFIL = {
   apelido: "VenomBrt",
-  titulo: "Fundador da Recreate Studios",
+  titulo: "Fundador do Recreate Studios",
   foto: "assets/images/perfil/foto.jpg",
   fotoReserva: "https://github.com/VenomBrt.png",
   funcoes: [
@@ -13,7 +13,7 @@ const PERFIL = {
     "Sites e aplicações web",
   ],
   sobre: [
-    "Sou o VenomBrt, desenvolvedor full-stack e fundador da Recreate Studios. Há mais de 5 anos crio experiências para Minecraft: mods, plugins, modpacks, launchers e servidores.",
+    "Sou o VenomBrt, desenvolvedor full-stack e fundador do Recreate Studios. Há mais de 5 anos crio experiências para Minecraft: mods, plugins, modpacks, launchers e servidores.",
     "Também desenvolvo sites e aplicações web, sempre buscando unir performance, visual caprichado e uma boa experiência para quem usa.",
   ],
   estatisticas: [
@@ -46,7 +46,7 @@ const PROJETOS = [
   {
     nome: "Recreate Launcher",
     categoria: "launcher",
-    descricao: "Launcher próprio da Recreate Studios com sistema de releases e atualização automática.",
+    descricao: "Launcher próprio do Recreate Studios com sistema de releases e atualização automática.",
     tecnologias: ["Electron", "JavaScript", "Node.js"],
     imagem: "",
     video: "",
