@@ -95,30 +95,19 @@ const PROJETOS = [
     links: [{ rotulo: "GitHub", url: "https://github.com/VenomBrt/recreate-launcher" }],
   },
   {
-    nome: "Recreate Menu",
+    nome: "Recreate Essencial",
     categoria: "mod",
     versao: "Forge 1.20.1",
-    descricao: "Experiência de abertura personalizada do modpack Recreate, da tela de carregamento até o menu principal.",
+    descricao: "Mod essencial do modpack Recreate, que cuida de toda a experiência de abertura, da tela de carregamento até o menu principal.",
     destaques: [
       "Tela de carregamento com efeito glitch",
       "Intro animada do Recreate Studios",
       "Atualizador automático do modpack",
-      "Player de música e fundos animados no menu",
+      "Menu principal com player de música e fundos animados",
     ],
     tecnologias: ["Java", "Forge", "Minecraft"],
     capa: "assets/images/projetos/recreate-menu-capa.jpg",
     video: "assets/videos/recreate-menu.mp4",
-    imagens: [],
-    links: [],
-  },
-  {
-    nome: "Recreate Essencial",
-    categoria: "mod",
-    versao: "",
-    descricao: "Mod essencial do ecossistema Recreate, com conteúdo sincronizado entre os jogadores.",
-    destaques: [],
-    tecnologias: ["Java", "Minecraft"],
-    capa: "",
     imagens: [],
     links: [],
   },
@@ -127,7 +116,7 @@ const PROJETOS = [
 // tipo: "imagem" | "video" | "youtube" (para youtube, use o ID do vídeo em "src")
 // capa: imagem mostrada na grade para vídeos
 const GALERIA = [
-  { tipo: "video", src: "assets/videos/recreate-menu.mp4", capa: "assets/images/projetos/recreate-menu-capa.jpg", legenda: "Recreate Menu" },
+  { tipo: "video", src: "assets/videos/recreate-menu.mp4", capa: "assets/images/projetos/recreate-menu-capa.jpg", legenda: "Recreate Essencial · menu" },
   { tipo: "imagem", src: "assets/images/projetos/betterlockcraft-blocos.jpg", legenda: "BetterLockCraft · cadeados nos blocos" },
   { tipo: "imagem", src: "assets/images/projetos/medicina-1.png", legenda: "Sistema de Medicina · itens", pixelado: true },
   { tipo: "video", src: "assets/videos/recreate-launcher.mp4", capa: "assets/images/projetos/recreate-launcher-capa.jpg", legenda: "Recreate Launcher" },
