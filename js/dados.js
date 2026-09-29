@@ -78,10 +78,10 @@ const PROJETOS = [
     selo: "Projeto mais desafiador",
     descricao: "Port do Create Aeronautics, que só existe para NeoForge 1.21.1, para o Forge 1.20.1. Um dos projetos mais difíceis que já fiz: muitas partes tiveram que ser refeitas do zero.",
     destaques: [
-      "Transforma construções em objetos com física real, livres da grade de blocos",
-      "Aviões, drones e dirigíveis com hélices, motores e pedras flutuantes",
+      "Pegue uma construção de blocos e transforme ela em algo com física real",
+      "Aviões, drones e dirigíveis com hélices: tudo isso é possível",
       "Balões de ar quente com sustentação que depende do volume e da altitude",
-      "Carros e caminhões: quase tudo que parece uma roda vira roda",
+      "Carros, caminhões e qualquer veículo funcionais, todos construídos à mão",
     ],
     tecnologias: ["Java", "Forge", "Create"],
     capa: "assets/images/projetos/aeronautics-fisica.jpg",
