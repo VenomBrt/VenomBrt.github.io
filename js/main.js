@@ -184,9 +184,10 @@ function midiaProjeto(p, indice) {
     : `<video src="${escapar(itens[0].src)}#t=1" muted playsinline preload="metadata"></video>`;
   const play = p.video ? `<span class="projeto-play"></span>` : "";
   const contador = itens.length > 1 ? `<span class="projeto-contador mono">${itens.length} mídias</span>` : "";
+  const selo = p.selo ? `<span class="projeto-selo mono">${escapar(p.selo)}</span>` : "";
   const classe = p.pixelado ? "projeto-midia pixelado" : "projeto-midia";
 
-  return `<div class="${classe}" data-projeto="${indice}">${imagem}${play}${categoria}${contador}</div>`;
+  return `<div class="${classe}" data-projeto="${indice}">${imagem}${play}${categoria}${selo}${contador}</div>`;
 }
 
 function renderizarProjetos() {

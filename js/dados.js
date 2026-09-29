@@ -69,7 +69,27 @@ const HABILIDADES = [
 // categoria: "mod" | "plugin" | "launcher" | "site"
 // capa: imagem do card; video e imagens aparecem ao clicar no card
 // pixelado: true para prints pequenos (inventário etc.), mantém os pixels nítidos
+// selo: etiqueta de destaque opcional no canto do card
 const PROJETOS = [
+  {
+    nome: "Recreate Aeronautics",
+    categoria: "mod",
+    versao: "Forge 1.20.1",
+    selo: "Projeto mais desafiador",
+    descricao: "Port do Create Aeronautics para Forge 1.20.1. Um dos projetos mais difíceis que já fiz: muitas partes tiveram que ser refeitas do zero.",
+    destaques: [
+      "Veículos montados bloco a bloco, com rodas e física",
+      "Balões e queimadores de ar quente para gerar sustentação",
+    ],
+    tecnologias: ["Java", "Forge", "Create"],
+    capa: "assets/images/projetos/aeronautics-fisica.jpg",
+    imagens: [
+      "assets/images/projetos/aeronautics-fisica.jpg",
+      "assets/images/projetos/aeronautics-veiculo.jpg",
+      "assets/images/projetos/aeronautics-balao.jpg",
+    ],
+    links: [],
+  },
   {
     nome: "BetterLockCraft",
     categoria: "plugin",
@@ -141,6 +161,7 @@ const PROJETOS = [
 // tipo: "imagem" | "video" | "youtube" (para youtube, use o ID do vídeo em "src")
 // capa: imagem mostrada na grade para vídeos
 const GALERIA = [
+  { tipo: "imagem", src: "assets/images/projetos/aeronautics-fisica.jpg", legenda: "Recreate Aeronautics · veículo no ar" },
   { tipo: "video", src: "assets/videos/recreate-menu.mp4", capa: "assets/images/projetos/recreate-menu-capa.jpg", legenda: "Recreate Essencial · menu" },
   { tipo: "imagem", src: "assets/images/projetos/betterlockcraft-blocos.jpg", legenda: "BetterLockCraft · cadeados nos blocos" },
   { tipo: "imagem", src: "assets/images/projetos/medicina-1.png", legenda: "Sistema de Medicina · itens", pixelado: true },
@@ -148,4 +169,6 @@ const GALERIA = [
   { tipo: "imagem", src: "assets/images/projetos/betterlockcraft-lockpicks.png", legenda: "BetterLockCraft · lockpicks" },
   { tipo: "imagem", src: "assets/images/projetos/medicina-2.png", legenda: "Sistema de Medicina · remédios", pixelado: true },
   { tipo: "imagem", src: "assets/images/projetos/medicina-3.png", legenda: "Sistema de Medicina · seringas", pixelado: true },
+  { tipo: "imagem", src: "assets/images/projetos/aeronautics-balao.jpg", legenda: "Recreate Aeronautics · balão de ar quente" },
+  { tipo: "imagem", src: "assets/images/projetos/aeronautics-veiculo.jpg", legenda: "Recreate Aeronautics · veículo" },
 ];
