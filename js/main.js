@@ -224,6 +224,7 @@ function renderizarProjetos() {
     const filtro = botao.dataset.filtro;
     if (filtro !== "todos" && !categoriasUsadas.has(filtro)) botao.remove();
     botao.addEventListener("click", () => {
+      som.tick();
       $$(".filtro").forEach((b) => b.classList.toggle("ativo", b === botao));
       $$(".projeto").forEach((card) => {
         card.classList.toggle("escondido", filtro !== "todos" && card.dataset.categoria !== filtro);
@@ -273,6 +274,7 @@ function iniciarLightbox() {
   }
 
   function abrir(lista, indice = 0) {
+    som.transicao();
     itens = lista;
     mostrar(indice);
     lightbox.classList.add("aberto");
@@ -290,8 +292,13 @@ function iniciarLightbox() {
     if (galeria) abrir(GALERIA, Number(galeria.dataset.galeria));
   });
 
-  $("#lightbox-anterior").addEventListener("click", () => mostrar(atual - 1));
-  $("#lightbox-proximo").addEventListener("click", () => mostrar(atual + 1));
+  const navegar = (passo) => {
+    som.tick();
+    mostrar(atual + passo);
+  };
+
+  $("#lightbox-anterior").addEventListener("click", () => navegar(-1));
+  $("#lightbox-proximo").addEventListener("click", () => navegar(1));
 
   lightbox.addEventListener("click", (e) => {
     if (e.target === lightbox || e.target.classList.contains("lightbox-fechar")) fechar();
@@ -300,8 +307,8 @@ function iniciarLightbox() {
   document.addEventListener("keydown", (e) => {
     if (!lightbox.classList.contains("aberto")) return;
     if (e.key === "Escape") fechar();
-    if (e.key === "ArrowLeft" && itens.length > 1) mostrar(atual - 1);
-    if (e.key === "ArrowRight" && itens.length > 1) mostrar(atual + 1);
+    if (e.key === "ArrowLeft" && itens.length > 1) navegar(-1);
+    if (e.key === "ArrowRight" && itens.length > 1) navegar(1);
   });
 }
 
@@ -313,6 +320,19 @@ function iniciarNavegacao() {
   window.addEventListener("scroll", () => nav.classList.toggle("rolado", window.scrollY > 40));
 
   $(".nav-toggle").addEventListener("click", () => nav.classList.toggle("menu-aberto"));
+
+  const botaoSom = $("#nav-som");
+  const atualizarSom = () => {
+    const texto = som.mudo ? "Ligar som" : "Desligar som";
+    botaoSom.classList.toggle("mudo", som.mudo);
+    botaoSom.setAttribute("aria-label", texto);
+    botaoSom.title = texto;
+  };
+  botaoSom.addEventListener("click", () => {
+    som.alternar();
+    atualizarSom();
+  });
+  atualizarSom();
   links.forEach((l) => l.addEventListener("click", () => nav.classList.remove("menu-aberto")));
 
   const observador = new IntersectionObserver(
@@ -359,6 +379,7 @@ function iniciarRevelacao() {
     (entradas) => {
       entradas.forEach((entrada) => {
         if (!entrada.isIntersecting) return;
+        som.decodificar(600);
         entrada.target.glitch.decodificar(600);
         titulos.unobserve(entrada.target);
       });
@@ -367,7 +388,11 @@ function iniciarRevelacao() {
   );
   $$(".titulo-secao").forEach((titulo) => {
     titulo.glitch = new Glitch(titulo);
-    titulo.addEventListener("mouseenter", () => titulo.glitch.surto(1.2));
+    titulo.addEventListener("mouseenter", () => {
+      if (titulo.glitch.ativo) return;
+      som.surto();
+      titulo.glitch.surto(1.2);
+    });
     titulos.observe(titulo);
   });
 }
@@ -403,9 +428,13 @@ async function iniciarHero() {
   document.body.classList.remove("carregando");
   document.body.classList.add("pronto");
 
+  som.decodificar(1100);
   await hero.decodificar(1100);
+  som.surto(true);
   await hero.surto(1.6, 220);
-  hero.automatico();
+  hero.automatico(1800, 5200, (forte) => {
+    if (window.scrollY < window.innerHeight * 0.5) som.ambiente(forte);
+  });
   iniciarDigitacao();
 }
 

@@ -152,6 +152,50 @@ img {
   width: 100%;
 }
 
+.nav-links {
+  margin-left: auto;
+}
+
+.nav-som {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  margin-left: 1.6rem;
+  background: none;
+  border: 1px solid var(--borda);
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.nav-som:hover {
+  border-color: var(--roxo);
+  box-shadow: var(--neon);
+}
+
+.nav-som svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: var(--roxo-claro);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.nav-som .som-x,
+.nav-som.mudo .som-ondas {
+  display: none;
+}
+
+.nav-som.mudo .som-x {
+  display: inline;
+}
+
+.nav-som.mudo svg {
+  stroke: var(--texto-2);
+}
+
 .nav-toggle {
   display: none;
   flex-direction: column;
@@ -1317,6 +1361,13 @@ img.pixelado {
 
   .nav-toggle {
     z-index: 2;
+    order: 2;
+    margin-left: 1.1rem;
+  }
+
+  .nav-som {
+    order: 1;
+    margin-left: auto;
   }
 
   .sobre-grid {

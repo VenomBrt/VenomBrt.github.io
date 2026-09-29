@@ -147,11 +147,12 @@ class Glitch {
     });
   }
 
-  automatico(min = 1800, max = 5200) {
+  automatico(min = 1800, max = 5200, aoSurto) {
     clearTimeout(this.timer);
     const agendar = () => {
       this.timer = setTimeout(async () => {
         const forte = Math.random() < 0.2;
+        aoSurto?.(forte);
         await this.surto(forte ? 1.8 : 1);
         if (Math.random() < 0.3) {
           await new Promise((r) => setTimeout(r, aleatorio(60, 160)));
