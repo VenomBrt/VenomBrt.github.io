@@ -15,6 +15,14 @@ function rodarIntro() {
     return Promise.resolve();
   }
 
+  let jaViu = false;
+  try {
+    jaViu = sessionStorage.getItem("introVista") === "1";
+    sessionStorage.setItem("introVista", "1");
+  } catch {}
+
+  if (jaViu) return introRapida(intro);
+
   let pulou = false;
   const pular = () => (pulou = true);
   intro.addEventListener("click", pular);
@@ -76,4 +84,15 @@ function rodarIntro() {
   }
 
   return sequencia();
+}
+
+async function introRapida(intro) {
+  intro.classList.add("rapida");
+  const logo = new Glitch(document.getElementById("intro-logo"));
+  logo.esconder();
+  await logo.decodificar(350);
+  await logo.surto(2, 200);
+  intro.classList.add("saindo");
+  await new Promise((r) => setTimeout(r, 650));
+  intro.remove();
 }

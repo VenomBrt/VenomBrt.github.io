@@ -282,6 +282,12 @@ body.carregando {
   background: repeating-linear-gradient(to bottom, transparent 0, transparent 2px, rgba(168, 85, 247, 0.04) 3px);
 }
 
+.intro.rapida .intro-terminal,
+.intro.rapida .intro-carregamento,
+.intro.rapida .intro-pular {
+  display: none;
+}
+
 .intro.saindo .intro-conteudo {
   animation: intro-sumir 0.3s steps(5) forwards;
 }
