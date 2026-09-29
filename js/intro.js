@@ -74,15 +74,13 @@ function rodarIntro() {
       }
     };
 
-    const duracaoLogo = pulou ? 250 : 1300;
-    som.decodificar(duracaoLogo);
-    await Promise.all([carregar(), logo.decodificar(duracaoLogo)]);
+    som.etapa();
+    await Promise.all([carregar(), logo.decodificar(pulou ? 250 : 1300)]);
     await esperar(150);
-    som.surto(true);
     await logo.surto(2.2, 260);
     await esperar(120);
 
-    som.transicao(true);
+    som.final();
     intro.classList.add("saindo");
     await new Promise((r) => setTimeout(r, 750));
     intro.remove();
@@ -95,9 +93,7 @@ async function introRapida(intro) {
   intro.classList.add("rapida");
   const logo = new Glitch(document.getElementById("intro-logo"));
   logo.esconder();
-  som.decodificar(350);
   await logo.decodificar(350);
-  som.surto(true);
   await logo.surto(2, 200);
   som.transicao();
   intro.classList.add("saindo");

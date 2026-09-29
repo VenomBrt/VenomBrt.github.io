@@ -321,7 +321,7 @@ function iniciarNavegacao() {
 
   $(".nav-toggle").addEventListener("click", () => nav.classList.toggle("menu-aberto"));
 
-  $$(".glitch-hover").forEach((el) => el.addEventListener("mouseenter", () => som.surto()));
+  $$(".glitch-hover").forEach((el) => el.addEventListener("mouseenter", () => som.burst()));
 
   const botaoSom = $("#nav-som");
   const atualizarSom = () => {
@@ -381,7 +381,6 @@ function iniciarRevelacao() {
     (entradas) => {
       entradas.forEach((entrada) => {
         if (!entrada.isIntersecting) return;
-        som.decodificar(600);
         entrada.target.glitch.decodificar(600);
         titulos.unobserve(entrada.target);
       });
@@ -390,11 +389,7 @@ function iniciarRevelacao() {
   );
   $$(".titulo-secao").forEach((titulo) => {
     titulo.glitch = new Glitch(titulo);
-    titulo.addEventListener("mouseenter", () => {
-      if (titulo.glitch.ativo) return;
-      som.surto();
-      titulo.glitch.surto(1.2);
-    });
+    titulo.addEventListener("mouseenter", () => titulo.glitch.surto(1.2));
     titulos.observe(titulo);
   });
 }
@@ -430,13 +425,9 @@ async function iniciarHero() {
   document.body.classList.remove("carregando");
   document.body.classList.add("pronto");
 
-  som.decodificar(1100);
   await hero.decodificar(1100);
-  som.surto(true);
   await hero.surto(1.6, 220);
-  hero.automatico(1800, 5200, (forte) => {
-    if (window.scrollY < window.innerHeight * 0.5) som.ambiente(forte);
-  });
+  hero.automatico();
   iniciarDigitacao();
 }
 

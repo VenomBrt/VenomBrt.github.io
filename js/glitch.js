@@ -91,9 +91,13 @@ class Glitch {
     if (this.ativo) return Promise.resolve();
     this.ativo = true;
     const fim = performance.now() + duracao * Math.min(intensidade, 2);
+    Glitch.som?.burst(intensidade >= 1.6);
+    let primeiro = true;
 
     return new Promise((resolve) => {
       const passo = () => {
+        if (!primeiro) Glitch.som?.tick();
+        primeiro = false;
         this.letras.forEach((l) => this.restaurar(l));
         this.corromperLetras(intensidade);
         this.fatiar(intensidade);
@@ -117,6 +121,8 @@ class Glitch {
     const inicio = performance.now();
     const n = this.letrasVisiveis.length;
     const momentos = this.letrasVisiveis.map((_, i) => (i / n) * duracao * 0.65 + aleatorio(0, duracao * 0.35));
+    Glitch.som?.ambiente();
+    let pendentesAntes = n;
 
     return new Promise((resolve) => {
       const passo = () => {
@@ -132,6 +138,8 @@ class Glitch {
             this.restaurar(letra);
           }
         });
+        if (pendentes < pendentesAntes) Glitch.som?.tick();
+        pendentesAntes = pendentes;
         if (Math.random() < 0.35) this.fatiar(1.2);
         else this.camadas.forEach((c) => (c.style.opacity = 0));
 
@@ -147,12 +155,11 @@ class Glitch {
     });
   }
 
-  automatico(min = 1800, max = 5200, aoSurto) {
+  automatico(min = 1800, max = 5200) {
     clearTimeout(this.timer);
     const agendar = () => {
       this.timer = setTimeout(async () => {
         const forte = Math.random() < 0.2;
-        aoSurto?.(forte);
         await this.surto(forte ? 1.8 : 1);
         if (Math.random() < 0.3) {
           await new Promise((r) => setTimeout(r, aleatorio(60, 160)));
